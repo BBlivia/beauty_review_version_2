@@ -1,8 +1,10 @@
 const express = require("express")
 const app = express()
-const PORT = 2001
+const PORT = 2021
 const {errorHandler} = require('./middleware/errorHandler')
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs")
+const path = require("path");
 const connectDB = require("../config/database")
 const session = require("express-session")
 const MongoStore = require("connect-mongo")
@@ -14,6 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(errorHandler)
 app.use("/api/v2/review", require("./routes/reviewRoutes"))
+app.use("/api/v2/user", require("./routes/userRoutes"))
 
 app.use(
     session({

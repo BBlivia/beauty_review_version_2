@@ -1,20 +1,31 @@
 const asyncHandler = require('express-async-handler')
 const Review = require("../models/reviewModel")
+const User = require("../models/userModel")
 
 
 
-const getReviews = asyncHandler (async (req, res)=>{
+const getAllReviews = asyncHandler (async (req, res)=>{
     const reviews = await Review.find()
   
     res.status(200).json(reviews)
 })
 
+const getMyReviews = asyncHandler(async(req, res)=>{
+      
+   // const myReviews = await Review.find({user: req.user.id})
+
+  res.status(200).json({myReviews})
+  
+  
+})
+
 const createReview = asyncHandler( async (req, res)=>{
-    if(!req.body.title){
+    if(!req.body){
         res.status(400)
         throw new Error ("please enter text")
     }
         const review = await Review.create({
+            user: req.user.id,
             title:req.body.title,
             // serviceProvider: req.body.serviceProvider,
             //  service: req.body.service,
@@ -57,7 +68,8 @@ const deleteReview = asyncHandler( async (req, res)=>{
 
 
 module.exports = {
-    getReviews,
+    getAllReviews,
+    getMyReviews,
     updateReview,
     createReview,
     deleteReview
