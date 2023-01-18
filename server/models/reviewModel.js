@@ -30,6 +30,9 @@ const ReviewSchema = mongoose.Schema({
                 type: Number,
                 require:true
             }
+
 })
+
+ReviewSchema.index({serviceProvider: 'text' })
 
 module.exports = mongoose.model("Review", ReviewSchema)

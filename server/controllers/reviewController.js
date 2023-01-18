@@ -27,7 +27,7 @@ const createReview = asyncHandler( async (req, res)=>{
         const review = await Review.create({
             user: req.user.id,
             title:req.body.title,
-            // serviceProvider: req.body.serviceProvider,
+             serviceProvider: req.body.serviceProvider,
             //  service: req.body.service,
             //  location: req.body.location,
             //  review: req.body.review,
@@ -39,13 +39,7 @@ const createReview = asyncHandler( async (req, res)=>{
     res.status(200).json(review)
 })
 
-// ry {
-//     await Post.findOneAndUpdate(
-//       { _id: req.params.id },
-//       {
-//         $inc: { likes: 1 },
-//       }
-//     );
+
 const updateReview = asyncHandler(async (req, res)=>{
     const review = await Review.findOneAndUpdate(
        {_id: req.params.id},
@@ -56,6 +50,23 @@ const updateReview = asyncHandler(async (req, res)=>{
      console.log("1 like added")
     res.status(200).json({message: "1 like added"})
 })
+
+const searchReview = asyncHandler(async (req, res)=>{
+    if(!req.body){
+        res.status(400)
+        throw new Error ("please enter text")
+    }
+    let searchTerm = req.body.searchTerm
+    let reviews = await Review.find({ $text: { $search: searchTerm, $diacriticSensitive: true} })
+    res.status(201).json(reviews)
+    console.log(reviews)
+})
+
+
+
+
+
+
 
 const deleteReview = asyncHandler( async (req, res)=>{
     const reviews = await Review.find()
@@ -72,5 +83,6 @@ module.exports = {
     getMyReviews,
     updateReview,
     createReview,
-    deleteReview
+    deleteReview,
+    searchReview
 }
