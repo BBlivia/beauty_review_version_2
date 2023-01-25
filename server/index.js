@@ -13,12 +13,12 @@ require("dotenv").config({ path: "./config/.env" });
 url = process.env.DB_STRING
 connectDB()
 
-app.use(express.json())
-app.use(express.urlencoded({extended:false}))
-app.use(cors())
-app.use(errorHandler)
-app.use("/api/v2/review", require("./routes/reviewRoutes"))
-app.use("/api/v2/user", require("./routes/userRoutes"))
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
+app.use(cors());
+app.use(errorHandler);
+app.use("/api/v2/review", require("./routes/reviewRoutes"));
+app.use("/api/v2/user", require("./routes/userRoutes"));
 
 app.use(
     session({

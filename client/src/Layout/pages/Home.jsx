@@ -1,7 +1,6 @@
-
-
 export default function Home(){
+
     return(
-        <div>Hello welcome to beauty review</div>
+        <div>Welcome to beauty review</div>
     )
 }
