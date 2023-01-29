@@ -5,6 +5,7 @@ const {errorHandler} = require('./middleware/errorHandler')
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs")
 const path = require("path");
+const cors = require("cors")
 const connectDB = require("../config/database")
 const session = require("express-session")
 const MongoStore = require("connect-mongo")
@@ -14,6 +15,7 @@ connectDB()
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
+app.use(cors())
 app.use(errorHandler)
 app.use("/api/v2/review", require("./routes/reviewRoutes"))
 app.use("/api/v2/user", require("./routes/userRoutes"))

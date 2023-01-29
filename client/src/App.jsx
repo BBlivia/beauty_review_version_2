@@ -1,14 +1,17 @@
 //import { useState } from 'react'
-
-
+import {BrowserRouter} from "react-router-dom"
+import Layout from "./Layout/Layout"
 
 function App() {
   //const [count, setCount] = useState(0)
 
   return (
     <div>
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
       
-      <h1 className="text-3xl font-bold underline">hello world</h1>
+      
       
     </div>
   )
